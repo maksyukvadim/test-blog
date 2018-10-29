@@ -1,11 +1,13 @@
 const COMMENTS = 'comments'
-export const getComments = () => JSON.parse(localStorage.getItem(COMMENTS))
+export const getComments = () => {
+   let comments = JSON.parse(localStorage.getItem(COMMENTS))
+    if(!comments) comments = {};
+    return comments
+}
 
 export const setComment = (comment, postId) => {
   let comments = getComments(COMMENTS)
-  if (!comments) {
-    comments = {}
-  }
+
   if (comments.hasOwnProperty(postId)) {
     comments[postId].push(comment)
   } else {
